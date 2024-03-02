@@ -21,8 +21,15 @@ class Game:
         palyer_position = tmx_data.get_object_by_name("player")
         self.player = Player(palyer_position.x, palyer_position.y)
 
+        # definir une liste qui va stocker les rectangles de collision
+        self.walls = []
+
+        for obj in tmx_data.objects:
+            if obj.type == "collision":
+                self.walls.append(pygame.Rect(obj.x, obj.y, obj.width, obj.height))
+
         # dessiner le groupe de calques
-        self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=3)
+        self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=6)
         self.group.add(self.player)
 
     def handel_input(self):
@@ -41,13 +48,25 @@ class Game:
             self.player.move_right()
             self.player.change_annimation('right')
 
+
+    def update(self):
+        self.group.update()
+
+        # verification de la collision
+        for sprite in self.group.sprites():
+            if sprite.feet.collidelist(self.walls) > -1:
+                sprite.move_back()
+
+
     def run(self):
         clock = pygame.time.Clock()
         # boucle du jeu
         running = True
         while running:
+
+            self.player.save_location()
             self.handel_input()
-            self.group.update()
+            self.update()
             self.group.center(self.player.rect)
             self.group.draw(self.screen)
             pygame.display.flip()
