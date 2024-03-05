@@ -32,6 +32,8 @@ class Game:
         self.group = pyscroll.PyscrollGroup(map_layer=map_layer, default_layer=6)
         self.group.add(self.player)
 
+
+
     def handel_input(self):
         pressed = pygame.key.get_pressed()
 
@@ -49,8 +51,12 @@ class Game:
             self.player.change_annimation('right')
 
 
+
+
     def update(self):
         self.group.update()
+
+
 
         # verification de la collision
         for sprite in self.group.sprites():
