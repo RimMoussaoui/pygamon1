@@ -3,6 +3,7 @@ import pygame
 from game import Game
 from player import Player
 
+
 class TestPlayer(unittest.TestCase):
 
     def setUp(self):
