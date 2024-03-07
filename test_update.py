@@ -1,8 +1,8 @@
 import pytest
-from game import Game  # replace with your actual module name
+from game import Game
 import pygame
 def test_update():
-    # create an instance of MyClass
+    # create an instance of Game
     my_obj = Game()
 
     # move the object such that it will collide with a wall
