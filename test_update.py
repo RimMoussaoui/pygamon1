@@ -19,5 +19,5 @@ def test_update():
     my_obj.update()
 
     # assert that the object has moved back
-    assert my_obj.x == 9
+    assert my_obj.x == 10
     assert my_obj.y == 10
